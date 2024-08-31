@@ -4,7 +4,7 @@
       {{ item.text }}
     </li>
     <li>
-      <form @submit.prevent="submitNewTodo()">
+      <form @submit.prevent="submitNewTodo">
         <input v-model="newTodo" type="text" />{{ ' ' }}
         <button type="submit">Add to-do</button>
       </form>

@@ -1,13 +1,22 @@
-import type { Effect, Event, Scope, Store, Unit } from 'effector';
-import { createWatch, fork, is, scopeBind } from 'effector';
+import type { Effect, Event, LegacyMap, Scope, SerializedState, Store, StorePair, Unit } from 'effector';
+import { createWatch, fork, is, scopeBind, serialize } from 'effector';
 import type { DeepReadonly, Ref } from 'vue';
 import { onUnmounted, ref, shallowRef } from 'vue';
-
-export const scopeRef = ref<Scope>(fork());
 
 import { useScope } from './useScope';
 
 type Equal<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? true : false;
+
+export const scopeRef = ref<Scope>(fork());
+
+export const updateScope = (values: StorePair<any>[] | SerializedState | LegacyMap) => {
+  scopeRef.value = fork({
+    values: {
+      ...(scopeRef.value ? serialize(scopeRef.value) : {}),
+      ...values,
+    },
+  });
+};
 
 const stateReader = <T>(store: Store<T>, scope?: Scope) => {
   return scope ? scope.getState(store) : store.getState();
