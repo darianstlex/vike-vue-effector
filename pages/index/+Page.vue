@@ -5,6 +5,7 @@
     <li>Rendered to HTML.</li>
     <li>Client counter: <Counter /></li>
     <li>Server counter: {{ counter }}</li>
+    <li>Random: {{ random }} <RandomButton /></li>
   </ul>
 </template>
 
@@ -13,6 +14,7 @@ import { useUnit } from '@utils/effector';
 
 import Counter from './Counter.vue';
 import { service } from './model';
+import RandomButton from './RandomButton.vue';
 
-const [counter] = useUnit([service.$counterServer]);
+const [counter, random] = useUnit([service.$counterServer, service.$random]);
 </script>

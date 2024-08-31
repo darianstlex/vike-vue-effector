@@ -1,6 +1,7 @@
 import type { Effect, Event, LegacyMap, Scope, SerializedState, Store, StorePair, Unit } from 'effector';
 import { createWatch, fork, is, scopeBind, serialize } from 'effector';
 import type { DeepReadonly, Ref } from 'vue';
+import { watch } from 'vue';
 import { onUnmounted, ref, shallowRef } from 'vue';
 
 import { useScope } from './useScope';
@@ -106,8 +107,13 @@ export function useUnit<Shape extends { [key: string]: Unit<any> }>(config: Shap
       scope: scope.value,
     });
 
+    const unwatch = watch(scope, (scp) => {
+      ref.value = scp.getState(normShape[key] as Store<any>);
+    });
+
     states[key] = {
       stop,
+      unwatch,
       ref,
     };
   }
@@ -115,6 +121,7 @@ export function useUnit<Shape extends { [key: string]: Unit<any> }>(config: Shap
   onUnmounted(() => {
     for (const val of Object.values(states)) {
       val.stop();
+      val.unwatch();
     }
   });
 
