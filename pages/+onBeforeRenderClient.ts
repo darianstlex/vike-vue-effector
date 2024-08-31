@@ -8,11 +8,12 @@ export const onBeforeRenderClient = async (pageContext: PageContextClient) => {
   const { scopeValues } = pageContext;
   if (pageContext.isHydration) {
     await allSettled(appService.appStarted, { scope: scopeRef.value });
+  } else {
+    scopeRef.value = fork({
+      values: {
+        ...(scopeRef.value ? serialize(scopeRef.value) : {}),
+        ...scopeValues,
+      },
+    });
   }
-  scopeRef.value = fork({
-    values: {
-      ...(scopeRef.value ? serialize(scopeRef.value) : {}),
-      ...scopeValues,
-    },
-  });
 };
