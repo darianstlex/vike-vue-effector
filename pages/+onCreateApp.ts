@@ -1,8 +1,7 @@
 import { fork } from 'effector';
 import type { OnCreateAppSync } from 'vike-vue/types';
 
-import { scopeRef } from '@utils/effector';
-import { setScope } from '@utils/useScope';
+import { scopeRef, setScope } from '@utils/effector';
 
 export const onCreateApp: OnCreateAppSync = (pageContext): ReturnType<OnCreateAppSync> => {
   const { app, scopeValues } = pageContext;

@@ -1,6 +1,6 @@
 import { sample } from 'effector';
 
-import { createPageInit } from '@utils/events';
+import { createPageInit } from '@utils/effector';
 
 import { service } from './model';
 
