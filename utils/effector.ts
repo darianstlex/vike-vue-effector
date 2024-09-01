@@ -107,8 +107,9 @@ export function useUnit<Shape extends { [key: string]: Unit<any> }>(config: Shap
       scope: scope.value,
     });
 
-    const unwatch = watch(scope, (scp) => {
-      ref.value = scp.getState(normShape[key] as Store<any>);
+    const unwatch = watch(scope, (scopeValue) => {
+      // @ts-expect-error TS can't infer that normShape[key] is a Store
+      ref.value = stateReader(normShape[key], scopeValue);
     });
 
     states[key] = {
