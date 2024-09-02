@@ -1,4 +1,4 @@
-import type { EventCallable, Scope } from 'effector';
+import type { EventCallable } from 'effector';
 import type { PageContextClient, PageContextServer } from 'vike/types';
 
 // https://vike.dev/pageContext#typescript
@@ -12,7 +12,6 @@ declare global {
         pageStarted?: EventCallable<PageContextClient>;
       };
       // https://effector.dev/en/api/effector/scope/
-      scope?: Scope;
       scopeValues?: Record<string, unknown>;
     }
   }

@@ -3,7 +3,7 @@ import { createWatch, is, scopeBind } from 'effector';
 import type { DeepReadonly, Ref } from 'vue';
 import { onUnmounted, shallowRef, watch } from 'vue';
 
-import { useScope } from './useScope';
+import { scopeRef } from './scope';
 
 type Equal<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? true : false;
 
@@ -50,8 +50,6 @@ export function useUnit<Shape extends Record<string, Event<any> | Effect<any, an
 };
 
 export function useUnit<Shape extends { [key: string]: Unit<any> }>(config: Shape | { '@@unitShape': () => Shape }) {
-  const scope = useScope();
-
   const isSingleUnit = is.unit(config);
 
   let normShape: { [key: string]: Unit<any> } = {};
@@ -84,25 +82,23 @@ export function useUnit<Shape extends { [key: string]: Unit<any> }>(config: Shap
 
   const states: Record<string, any> = {};
   for (const key of storeKeys) {
-    // @ts-expect-error TS can't infer that normShape[key] is a Store
-    const state = stateReader(normShape[key], scope.value);
+    const state = stateReader(normShape[key] as Store<any>, scopeRef.value);
     const ref = shallowRef(state);
     const stop = createWatch({
       unit: normShape[key],
       fn: (value) => {
         ref.value = shallowRef(value).value;
       },
-      scope: scope.value,
+      scope: scopeRef.value,
     });
 
-    const unwatch = watch(scope, (scopeValue) => {
-      // @ts-expect-error TS can't infer that normShape[key] is a Store
-      ref.value = stateReader(normShape[key], scopeValue);
+    const unwatchScope = watch(scopeRef, (scopeValue) => {
+      ref.value = stateReader(normShape[key] as Store<any>, scopeValue);
     });
 
     states[key] = {
       stop,
-      unwatch,
+      unwatchScope,
       ref,
     };
   }
@@ -110,7 +106,7 @@ export function useUnit<Shape extends { [key: string]: Unit<any> }>(config: Shap
   onUnmounted(() => {
     for (const val of Object.values(states)) {
       val.stop();
-      val.unwatch();
+      val.unwatchScope();
     }
   });
 
@@ -120,14 +116,14 @@ export function useUnit<Shape extends { [key: string]: Unit<any> }>(config: Shap
 
   if (isSingleUnit && is.event(config)) {
     // @ts-expect-error TS can't infer that normShape.unit is an Effect/Event
-    return scopeBind(normShape.unit, { scope: scope.value, safe: true });
+    return scopeBind(normShape.unit, { scope: scopeRef.value, safe: true });
   }
 
   const result: Record<string, any> = {};
 
   for (const key of eventKeys) {
     // @ts-expect-error TS can't infer that normShape[key] is an Effect/Event
-    result[key] = scopeBind(normShape[key], { scope: scope.value, safe: true });
+    result[key] = scopeBind(normShape[key], { scope: scopeRef.value, safe: true });
   }
   for (const [key, value] of Object.entries(states)) {
     result[key] = value.ref;

@@ -17,14 +17,10 @@ Ref, contains effector scope, used by effector utils for access/update scope, ca
 
 Utility for scope update on page rendering from server or telefunc. Use for own scope update cases
 
-### `setScope`
-
-Utility, used to inject initial scope, used in `onCreateApp` hook.
-
 ### `useScope`
 
 Hook, used to get scope in components, the difference with the `effector-vue` is that scope is kept in the ref, for reactive scope updates, for advanced usage.
 
 ### `useUnit`
 
-Hook, used to bind scope to the effector units. Its based on the original hook from `effector-vue`, removed readonly on values, to make it type compatible with the component props. The scope is taken from the `useScope` hook. Contains subscription to the scope updates, to keep store values in sync.
+Hook, used to bind scope to the effector units. It's based on the original hook from `effector-vue`, removed readonly on values, to make it type compatible with the component props. The scope is taken from the `scopeRef`. Contains subscription to the scope updates, to keep store values in sync on scope changes.

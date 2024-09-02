@@ -6,14 +6,13 @@ import { scopeRef } from '@utils/effector';
 
 export const onBeforeRenderClient = async (pageContext: PageContextClient) => {
   const { scopeValues } = pageContext;
+  scopeRef.value = fork({
+    values: {
+      ...(scopeRef.value ? serialize(scopeRef.value) : {}),
+      ...scopeValues,
+    },
+  });
   if (pageContext.isHydration) {
     await allSettled(appService.appStarted, { scope: scopeRef.value });
-  } else {
-    scopeRef.value = fork({
-      values: {
-        ...(scopeRef.value ? serialize(scopeRef.value) : {}),
-        ...scopeValues,
-      },
-    });
   }
 };
