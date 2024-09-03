@@ -1,19 +1,20 @@
 import { allSettled, fork, serialize } from 'effector';
 import type { OnBeforeRenderAsync } from 'vike/types';
 
+import { scopeRef } from '@utils/effector';
+
 export const onBeforeRender: OnBeforeRenderAsync = async (pageContext): ReturnType<OnBeforeRenderAsync> => {
   const { pageInitiated } = pageContext.config;
 
-  pageContext.scope = fork();
+  scopeRef.value = fork();
 
   if (pageInitiated) {
-    await allSettled(pageInitiated, { scope: pageContext.scope, params: pageContext });
+    await allSettled(pageInitiated, { scope: scopeRef.value, params: pageContext });
   }
 
   return {
     pageContext: {
-      scope: pageContext.scope,
-      scopeValues: serialize(pageContext.scope),
+      scopeValues: serialize(scopeRef.value),
     },
   };
 };
