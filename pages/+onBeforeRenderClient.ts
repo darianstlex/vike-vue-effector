@@ -1,18 +1,13 @@
-import { allSettled, fork, serialize } from 'effector';
+import { allSettled } from 'effector';
 import type { PageContextClient } from 'vike/types';
 
 import { appService } from '@services/app';
-import { scopeRef } from '@utils/effector';
+import { updateScope } from '@utils/effector';
 
 export const onBeforeRenderClient = async (pageContext: PageContextClient) => {
   const { scopeValues } = pageContext;
-  scopeRef.value = fork({
-    values: {
-      ...(scopeRef.value ? serialize(scopeRef.value) : {}),
-      ...scopeValues,
-    },
-  });
+  const scope = updateScope(scopeValues!);
   if (pageContext.isHydration) {
-    await allSettled(appService.appStarted, { scope: scopeRef.value });
+    await allSettled(appService.appStarted, { scope });
   }
 };

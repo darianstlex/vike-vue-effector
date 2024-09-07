@@ -12,4 +12,5 @@ export const updateScope = (values: SerializedState) => {
       ...(values || {}),
     },
   });
+  return scopeRef.value;
 };

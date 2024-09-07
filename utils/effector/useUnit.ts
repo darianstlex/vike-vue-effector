@@ -1,6 +1,7 @@
-import type { Effect, Event, Scope, Store, Unit } from 'effector';
+import type { Effect, Event, EventCallable, Scope, Store, Unit } from 'effector';
 import { createWatch, is, scopeBind } from 'effector';
-import type { DeepReadonly, Ref } from 'vue';
+import type { DeepReadonly, Ref, ShallowRef } from 'vue';
+import { ref } from 'vue';
 import { onUnmounted, shallowRef, watch } from 'vue';
 
 import { scopeRef } from './scope';
@@ -9,6 +10,56 @@ type Equal<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ?
 
 const stateReader = <T>(store: Store<T>, scope?: Scope) => {
   return scope ? scope.getState(store) : store.getState();
+};
+
+/**
+ * Watch scope changes and bind it to the unit
+ */
+const scopeBindWatch = (unit: EventCallable<any> | Effect<any, any>) => {
+  const unitRef = ref<EventCallable<any> | Effect<any, any>>();
+
+  const unwatchScope = watch(
+    scopeRef,
+    (scope) => {
+      unitRef.value = scopeBind(unit, { scope, safe: true });
+    },
+    { immediate: true },
+  );
+
+  onUnmounted(() => {
+    unwatchScope();
+  });
+
+  return (data: any) => {
+    return unitRef.value?.(data);
+  };
+};
+
+/**
+ * Watch scope changes and recreate store watcher
+ */
+const createDoubleWatch = (unit: Store<any>, valRef: ShallowRef<any>) => {
+  const subRef = ref();
+  const unwatchScope = watch(
+    scopeRef,
+    (scope) => {
+      valRef.value = stateReader(unit, scope);
+      subRef.value?.();
+      subRef.value = createWatch({
+        unit,
+        fn: (value) => {
+          valRef.value = shallowRef(value).value;
+        },
+        scope,
+      });
+    },
+    { immediate: true },
+  );
+
+  onUnmounted(() => {
+    unwatchScope();
+    subRef.value?.();
+  });
 };
 
 export function useUnit<State>(store: Store<State>, opts?: { forceScope?: boolean }): DeepReadonly<Ref<State>>;
@@ -82,33 +133,10 @@ export function useUnit<Shape extends { [key: string]: Unit<any> }>(config: Shap
 
   const states: Record<string, any> = {};
   for (const key of storeKeys) {
-    const state = stateReader(normShape[key] as Store<any>, scopeRef.value);
-    const ref = shallowRef(state);
-    const stop = createWatch({
-      unit: normShape[key],
-      fn: (value) => {
-        ref.value = shallowRef(value).value;
-      },
-      scope: scopeRef.value,
-    });
-
-    const unwatchScope = watch(scopeRef, (scopeValue) => {
-      ref.value = stateReader(normShape[key] as Store<any>, scopeValue);
-    });
-
-    states[key] = {
-      stop,
-      unwatchScope,
-      ref,
-    };
+    const ref = shallowRef();
+    createDoubleWatch(normShape[key] as Store<any>, ref);
+    states[key] = { ref };
   }
-
-  onUnmounted(() => {
-    for (const val of Object.values(states)) {
-      val.stop();
-      val.unwatchScope();
-    }
-  });
 
   if (isSingleUnit && is.store(config)) {
     return states.unit.ref;
@@ -116,14 +144,14 @@ export function useUnit<Shape extends { [key: string]: Unit<any> }>(config: Shap
 
   if (isSingleUnit && is.event(config)) {
     // @ts-expect-error TS can't infer that normShape.unit is an Effect/Event
-    return scopeBind(normShape.unit, { scope: scopeRef.value, safe: true });
+    return scopeBindWatch(normShape.unit);
   }
 
   const result: Record<string, any> = {};
 
   for (const key of eventKeys) {
     // @ts-expect-error TS can't infer that normShape[key] is an Effect/Event
-    result[key] = scopeBind(normShape[key], { scope: scopeRef.value, safe: true });
+    result[key] = scopeBindWatch(normShape[key]);
   }
   for (const [key, value] of Object.entries(states)) {
     result[key] = value.ref;
