@@ -16,17 +16,16 @@ const stateReader = <T>(store: Store<T>, scope?: Scope) => {
  */
 const scopeBindWatch = (unit: EventCallable<any> | Effect<any, any>) => {
   const unitRef = shallowRef<EventCallable<any> | Effect<any, any>>();
+  unitRef.value = scopeBind(unit, { scope: scopeRef?.value, safe: true });
 
-  const unwatchScope = watch(
-    scopeRef,
-    (scope) => {
-      unitRef.value = scopeBind(unit, { scope, safe: true });
-    },
-    { immediate: true },
-  );
+  const unwatchScope = scopeRef?.value
+    ? watch(scopeRef, (scope) => {
+        unitRef.value = scopeBind(unit, { scope, safe: true });
+      })
+    : undefined;
 
   onUnmounted(() => {
-    unwatchScope();
+    unwatchScope?.();
   });
 
   return (data: any) => {
@@ -35,28 +34,36 @@ const scopeBindWatch = (unit: EventCallable<any> | Effect<any, any>) => {
 };
 
 /**
+ * Watch store changes in scope
+ */
+const storeWatch = (unit: Store<any>, valRef: ShallowRef<any>, scope: Scope) => {
+  return createWatch({
+    unit,
+    fn: (value) => {
+      valRef.value = value;
+    },
+    scope,
+  });
+};
+
+/**
  * Watch scope changes and recreate store watcher
  */
-const createDoubleWatch = (unit: Store<any>, valRef: ShallowRef<any>) => {
+const createStoreWatcher = (unit: Store<any>, valRef: ShallowRef<any>) => {
   const subRef = shallowRef();
-  const unwatchScope = watch(
-    scopeRef,
-    (scope) => {
-      valRef.value = stateReader(unit, scope);
-      subRef.value?.();
-      subRef.value = createWatch({
-        unit,
-        fn: (value) => {
-          valRef.value = shallowRef(value).value;
-        },
-        scope,
-      });
-    },
-    { immediate: true },
-  );
+  valRef.value = stateReader(unit, scopeRef?.value);
+  subRef.value = storeWatch(unit, valRef, scopeRef?.value);
+
+  const unwatchScope = scopeRef?.value
+    ? watch(scopeRef, (scope) => {
+        valRef.value = stateReader(unit, scope);
+        subRef.value?.();
+        subRef.value = storeWatch(unit, valRef, scope);
+      })
+    : undefined;
 
   onUnmounted(() => {
-    unwatchScope();
+    unwatchScope?.();
     subRef.value?.();
   });
 };
@@ -133,7 +140,7 @@ export function useUnit<Shape extends { [key: string]: Unit<any> }>(config: Shap
   const states: Record<string, any> = {};
   for (const key of storeKeys) {
     const ref = shallowRef();
-    createDoubleWatch(normShape[key] as Store<any>, ref);
+    createStoreWatcher(normShape[key] as Store<any>, ref);
     states[key] = { ref };
   }
 
