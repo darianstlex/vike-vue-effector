@@ -1,7 +1,6 @@
 import type { Effect, Event, EventCallable, Scope, Store, Unit } from 'effector';
 import { createWatch, is, scopeBind } from 'effector';
 import type { DeepReadonly, Ref, ShallowRef } from 'vue';
-import { ref } from 'vue';
 import { onUnmounted, shallowRef, watch } from 'vue';
 
 import { scopeRef } from './scope';
@@ -16,7 +15,7 @@ const stateReader = <T>(store: Store<T>, scope?: Scope) => {
  * Watch scope changes and bind it to the unit
  */
 const scopeBindWatch = (unit: EventCallable<any> | Effect<any, any>) => {
-  const unitRef = ref<EventCallable<any> | Effect<any, any>>();
+  const unitRef = shallowRef<EventCallable<any> | Effect<any, any>>();
 
   const unwatchScope = watch(
     scopeRef,
@@ -39,7 +38,7 @@ const scopeBindWatch = (unit: EventCallable<any> | Effect<any, any>) => {
  * Watch scope changes and recreate store watcher
  */
 const createDoubleWatch = (unit: Store<any>, valRef: ShallowRef<any>) => {
-  const subRef = ref();
+  const subRef = shallowRef();
   const unwatchScope = watch(
     scopeRef,
     (scope) => {
