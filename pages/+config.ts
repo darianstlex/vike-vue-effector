@@ -1,5 +1,5 @@
 import type { Config } from 'vike/types';
-import vikeVue from 'vike-vue/config';
+import { config } from 'vike-vue/config';
 
 import Head from '../layouts/HeadDefault.vue';
 import Layout from '../layouts/LayoutDefault.vue';
@@ -23,5 +23,5 @@ export default {
 
   // <title>
   title: 'My Vike App',
-  extends: vikeVue,
+  extends: config,
 } satisfies Config;
