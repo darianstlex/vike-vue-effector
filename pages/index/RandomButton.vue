@@ -1,5 +1,5 @@
 <template>
-  <button @click="onClick">Generate</button>
+  <button @click="onClick">Telefunc scope update</button>
 </template>
 
 <script lang="ts" setup>
