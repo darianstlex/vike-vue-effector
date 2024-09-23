@@ -24,12 +24,12 @@
     "vue": "^3.5.8"
   },
   "devDependencies": {
-    "@eslint/js": "^9.11.0",
+    "@eslint/js": "^9.11.1",
     "@types/express": "^4.17.21",
     "@vitejs/plugin-vue": "^5.1.4",
     "@vue/language-server": "^2.1.6",
     "cross-env": "^7.0.3",
-    "eslint": "^9.11.0",
+    "eslint": "^9.11.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-simple-import-sort": "^12.1.1",
@@ -37,7 +37,7 @@
     "prettier": "^3.3.3",
     "tsx": "^4.19.1",
     "typescript": "^5.6.2",
-    "typescript-eslint": "^8.6.0",
+    "typescript-eslint": "^8.7.0",
     "unplugin-vue-markdown": "^0.26.2",
     "vike": "^0.4.196",
     "vike-vue": "^0.8.5",
