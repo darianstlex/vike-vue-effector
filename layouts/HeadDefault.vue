@@ -6,6 +6,6 @@
   <link rel="icon" :href="logoUrl" />
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import logoUrl from '@assets/logo.svg';
 </script>
