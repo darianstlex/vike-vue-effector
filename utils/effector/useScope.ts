@@ -11,6 +11,6 @@ export const useScope = (): ShallowRef<Scope> => {
   return scopeRef;
 };
 
-export const setScope = (scopeRef: ShallowRef<Scope>): void => {
+export const provideScope = (scopeRef: ShallowRef<Scope>): void => {
   provide(key, scopeRef);
 };

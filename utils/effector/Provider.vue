@@ -4,9 +4,9 @@
 import { usePageContext } from 'vike-vue/usePageContext';
 
 import { getScope } from './scope';
-import { setScope } from './useScope';
+import { provideScope } from './useScope';
 
 const pageContext = usePageContext();
 const scope = getScope(pageContext.scopeValues);
-setScope(scope);
+provideScope(scope);
 </script>

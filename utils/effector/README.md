@@ -13,7 +13,7 @@ Creates page start event, used to start effector logic needed on client side on 
 
 Utility for scope merge/update on client navigation or telefunc. Use for advanced scope update cases.
 
-### `useScope/setScope`
+### `provideScope/useScope`
 
 Internal hooks, used to provide/inject scope ref. For advanced usage.
 
