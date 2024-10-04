@@ -1,6 +1,5 @@
 import type { createStore, Json, Node, Scope, SerializedState, StateRef } from 'effector';
 import { fork, launch } from 'effector';
-import type { Ref } from 'vue';
 import { shallowRef } from 'vue';
 
 type StoreSerializationConfig = Exclude<Parameters<typeof createStore>[1], undefined>['serialize'];
@@ -9,17 +8,16 @@ type ScopeInternal = Scope & {
   additionalLinks: Record<string, Node[]>;
 };
 
-export const scopeRef = shallowRef<Scope>(fork());
+const scopeRef = shallowRef(fork());
 
 const isClient = typeof document !== 'undefined';
 
 const getServerScope = (values?: SerializedState) => {
-  scopeRef.value = fork({ values });
-  return scopeRef.value;
+  return shallowRef(fork({ values }));
 };
 
-const updateScope = (values?: SerializedState) => {
-  if (!values) return scopeRef.value;
+const mergeScope = (values?: SerializedState) => {
+  if (!values) return scopeRef;
 
   // @ts-expect-error this is a really hacky way to "hydrate" scope
   Object.assign(scopeRef.value.values.sidMap, values);
@@ -76,12 +74,8 @@ const updateScope = (values?: SerializedState) => {
     });
   }
 
-  return scopeRef.value;
-};
-
-export const getScope = isClient ? updateScope : getServerScope;
-
-export const useScope = (): Ref<Scope> => {
-  if (!scopeRef.value) throw new Error('scope is not set');
   return scopeRef;
 };
+
+export const getScope = isClient ? mergeScope : getServerScope;
+export const updateScope = getScope;

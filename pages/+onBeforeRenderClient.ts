@@ -6,8 +6,8 @@ import { getScope } from '@utils/effector';
 
 export const onBeforeRenderClient = async (pageContext: PageContextClient) => {
   const { scopeValues } = pageContext;
-  const scope = getScope(scopeValues!);
+  const scopeRef = getScope(scopeValues!);
   if (pageContext.isHydration) {
-    await allSettled(appService.appStarted, { scope });
+    await allSettled(appService.appStarted, { scope: scopeRef.value });
   }
 };

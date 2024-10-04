@@ -1,9 +1,9 @@
 import type { Effect, Event, EventCallable, Scope, Store, Unit } from 'effector';
 import { createWatch, is, scopeBind } from 'effector';
-import type { DeepReadonly, Ref, ShallowRef } from 'vue';
+import type { DeepReadonly, ShallowRef } from 'vue';
 import { onUnmounted, shallowRef, watch } from 'vue';
 
-import { scopeRef } from './scope';
+import { useScope } from './useScope';
 
 type Equal<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? true : false;
 
@@ -14,7 +14,7 @@ const stateReader = <T>(store: Store<T>, scope?: Scope) => {
 /**
  * Watch scope changes and bind it to the unit
  */
-const scopeBindWatch = (unit: EventCallable<any> | Effect<any, any>) => {
+const scopeBindWatch = (scopeRef: ShallowRef<Scope>, unit: EventCallable<any> | Effect<any, any>) => {
   const unitRef = shallowRef<EventCallable<any> | Effect<any, any>>();
   unitRef.value = scopeBind(unit, { scope: scopeRef?.value, safe: true });
 
@@ -49,7 +49,7 @@ const storeWatch = (unit: Store<any>, valRef: ShallowRef<any>, scope: Scope) => 
 /**
  * Watch scope changes and recreate store watcher
  */
-const createStoreWatcher = (unit: Store<any>, valRef: ShallowRef<any>) => {
+const createStoreWatcher = (scopeRef: ShallowRef<Scope>, unit: Store<any>, valRef: ShallowRef<any>) => {
   const subRef = shallowRef();
   valRef.value = stateReader(unit, scopeRef?.value);
   subRef.value = storeWatch(unit, valRef, scopeRef?.value);
@@ -68,7 +68,7 @@ const createStoreWatcher = (unit: Store<any>, valRef: ShallowRef<any>) => {
   });
 };
 
-export function useUnit<State>(store: Store<State>, opts?: { forceScope?: boolean }): DeepReadonly<Ref<State>>;
+export function useUnit<State>(store: Store<State>, opts?: { forceScope?: boolean }): DeepReadonly<ShallowRef<State>>;
 export function useUnit(event: Event<void>, opts?: { forceScope?: boolean }): () => void;
 export function useUnit<T>(event: Event<T>, opts?: { forceScope?: boolean }): (payload: T) => T;
 export function useUnit<R>(fx: Effect<void, R, any>, opts?: { forceScope?: boolean }): () => Promise<R>;
@@ -86,7 +86,7 @@ export function useUnit<List extends (Event<any> | Effect<any, any> | Store<any>
         ? () => Promise<D>
         : (payload: P) => Promise<D>
       : List[Key] extends Store<infer V>
-        ? DeepReadonly<Ref<V>>
+        ? DeepReadonly<ShallowRef<V>>
         : never;
 };
 export function useUnit<Shape extends Record<string, Event<any> | Effect<any, any, any> | Store<any>>>(
@@ -102,11 +102,12 @@ export function useUnit<Shape extends Record<string, Event<any> | Effect<any, an
         ? () => Promise<D>
         : (payload: P) => Promise<D>
       : Shape[Key] extends Store<infer V>
-        ? DeepReadonly<Ref<V>>
+        ? DeepReadonly<ShallowRef<V>>
         : never;
 };
 
 export function useUnit<Shape extends { [key: string]: Unit<any> }>(config: Shape | { '@@unitShape': () => Shape }) {
+  const scopeRef = useScope();
   const isSingleUnit = is.unit(config);
 
   let normShape: { [key: string]: Unit<any> } = {};
@@ -140,7 +141,7 @@ export function useUnit<Shape extends { [key: string]: Unit<any> }>(config: Shap
   const states: Record<string, any> = {};
   for (const key of storeKeys) {
     const ref = shallowRef();
-    createStoreWatcher(normShape[key] as Store<any>, ref);
+    createStoreWatcher(scopeRef, normShape[key] as Store<any>, ref);
     states[key] = { ref };
   }
 
@@ -150,14 +151,14 @@ export function useUnit<Shape extends { [key: string]: Unit<any> }>(config: Shap
 
   if (isSingleUnit && is.event(config)) {
     // @ts-expect-error TS can't infer that normShape.unit is an Effect/Event
-    return scopeBindWatch(normShape.unit);
+    return scopeBindWatch(scopeRef, normShape.unit);
   }
 
   const result: Record<string, any> = {};
 
   for (const key of eventKeys) {
     // @ts-expect-error TS can't infer that normShape[key] is an Effect/Event
-    result[key] = scopeBindWatch(normShape[key]);
+    result[key] = scopeBindWatch(scopeRef, normShape[key]);
   }
   for (const [key, value] of Object.entries(states)) {
     result[key] = value.ref;
