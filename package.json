@@ -14,14 +14,14 @@
   "dependencies": {
     "@universal-middleware/core": "^0.2.11",
     "@universal-middleware/express": "^0.2.6",
-    "@vue/compiler-sfc": "^3.5.10",
-    "@vue/server-renderer": "^3.5.10",
+    "@vue/compiler-sfc": "^3.5.11",
+    "@vue/server-renderer": "^3.5.11",
     "cross-fetch": "^4.0.0",
-    "effector": "^23.2.2",
+    "effector": "^23.2.3",
     "express": "^4.21.0",
     "patronum": "^2.2.0",
     "telefunc": "^0.1.79",
-    "vue": "^3.5.10"
+    "vue": "^3.5.11"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",
@@ -37,9 +37,9 @@
     "prettier": "^3.3.3",
     "tsx": "^4.19.1",
     "typescript": "^5.6.2",
-    "typescript-eslint": "^8.7.0",
+    "typescript-eslint": "^8.8.0",
     "unplugin-vue-markdown": "^0.26.2",
-    "vike": "^0.4.197",
+    "vike": "^0.4.198",
     "vike-vue": "^0.8.5",
     "vite": "^5.4.8",
     "vue-eslint-parser": "^9.4.3"
