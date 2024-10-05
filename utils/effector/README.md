@@ -9,7 +9,7 @@ Creates page init event, used for initiating effector logic needed to prepare da
 
 Creates page start event, used to start effector logic needed on client side on page start.
 
-### `getScope/updateScope` - aliases
+### `getUpdateScope`
 
 Utility for scope merge/update on client navigation or telefunc. Use for advanced scope update cases.
 

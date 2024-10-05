@@ -77,5 +77,4 @@ const mergeScope = (values?: SerializedState) => {
   return scopeRef;
 };
 
-export const getScope = isClient ? mergeScope : getServerScope;
-export const updateScope = getScope;
+export const getUpdateScope = isClient ? mergeScope : getServerScope;

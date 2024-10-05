@@ -3,10 +3,10 @@
 <script lang="ts" setup>
 import { usePageContext } from 'vike-vue/usePageContext';
 
-import { getScope } from './scope';
+import { getUpdateScope } from './scope';
 import { provideScope } from './useScope';
 
 const pageContext = usePageContext();
-const scope = getScope(pageContext.scopeValues);
+const scope = getUpdateScope(pageContext.scopeValues);
 provideScope(scope);
 </script>
