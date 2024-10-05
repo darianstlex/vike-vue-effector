@@ -8,7 +8,9 @@ import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
   plugins: [
-    vike({}),
+    vike({
+      prerender: true,
+    }),
     telefunc(),
     vue({
       include: [/\.vue$/, /\.md$/],
