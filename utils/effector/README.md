@@ -9,9 +9,10 @@ Creates page init event, used for initiating effector logic needed to prepare da
 
 Creates page start event, used to start effector logic needed on client side on page start.
 
-### `getUpdateScope`
+### `getMergeScope`
 
-Utility for scope merge/update on client navigation or telefunc. Use for advanced scope update cases.
+Utility for scope get/merge. Use on client, useful for scope merge on navigation or data from telefunc. On server returns new scope.
+Use for advanced scope update cases.
 
 ### `provideScope/useScope`
 

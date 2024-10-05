@@ -3,12 +3,12 @@
 </template>
 
 <script lang="ts" setup>
-import { getUpdateScope } from '@utils/effector';
+import { getMergeScope } from '@utils/effector';
 
 import { onGenerateRandom } from './RandomButton.telefunc';
 
 const onClick = async () => {
   const scopeValues = await onGenerateRandom();
-  getUpdateScope(scopeValues);
+  getMergeScope(scopeValues);
 };
 </script>
