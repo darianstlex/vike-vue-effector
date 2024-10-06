@@ -3,9 +3,9 @@
 <script lang="ts" setup>
 import { usePageContext } from 'vike-vue/usePageContext';
 
-import { injectScope } from './useScope';
+import { provideScope } from './useScope';
 
-const pageContext = usePageContext();
+const { scopeValues } = usePageContext();
 
-injectScope(pageContext.scopeValues);
+provideScope(scopeValues);
 </script>

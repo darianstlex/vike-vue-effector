@@ -13,7 +13,7 @@ export const useScope = (): ShallowRef<Scope> => {
   return scopeRef;
 };
 
-export const injectScope = (scopeValues?: Record<string, unknown>): void => {
+export const provideScope = (scopeValues?: Record<string, unknown>): void => {
   const scopeRef = getMergeScope(!isClient ? scopeValues : undefined);
   provide(key, scopeRef);
 };
