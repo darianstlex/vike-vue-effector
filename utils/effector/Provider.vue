@@ -3,10 +3,10 @@
 <script lang="ts" setup>
 import { usePageContext } from 'vike-vue/usePageContext';
 
-import { getMergeScope } from './scope';
+import { getMergeScope, isClient } from './scope';
 import { provideScope } from './useScope';
 
 const pageContext = usePageContext();
-const scope = getMergeScope(pageContext.scopeValues);
+const scope = getMergeScope(!isClient ? pageContext.scopeValues : undefined);
 provideScope(scope);
 </script>

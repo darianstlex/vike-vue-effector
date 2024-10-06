@@ -10,7 +10,7 @@ type ScopeInternal = Scope & {
 
 const scopeRef = shallowRef(fork());
 
-const isClient = typeof document !== 'undefined';
+export const isClient = typeof document !== 'undefined';
 
 const getServerScope = (values?: SerializedState) => {
   return shallowRef(fork({ values }));
