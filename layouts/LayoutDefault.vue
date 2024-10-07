@@ -3,9 +3,10 @@
     <div class="layout">
       <Sidebar>
         <Logo />
-        <Link href="/"> Welcome </Link>
-        <Link href="/todo"> Todo </Link>
-        <Link href="/star-wars"> Data Fetching </Link>
+        <Link href="/">Welcome</Link>
+        <Link href="/todo">Todo</Link>
+        <Link href="/star-wars">Data Fetching</Link>
+        <Link href="/hello">Hello</Link>
       </Sidebar>
       <Content><slot /></Content>
     </div>

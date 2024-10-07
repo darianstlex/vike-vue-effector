@@ -1,4 +1,5 @@
 import express from 'express';
+import { exec } from 'node:child_process';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -19,13 +20,7 @@ async function startServer() {
   const app = express();
 
   if (process.env.NODE_ENV === 'production') {
-    app.use(
-      express.static(`${root}/dist/client`, {
-        etag: true,
-        immutable: true,
-        maxAge: 31536000,
-      }),
-    );
+    app.use(express.static(`${root}/dist/client`));
   } else {
     // Instantiate Vite's development server and integrate its middleware to our server.
     // ⚠️ We should instantiate it *only* in development. (It isn't needed in production
@@ -52,6 +47,22 @@ async function startServer() {
   app.listen(port, () => {
     console.log(`Server listening on http://localhost:${port}`);
   });
+
+  if (process.env.NODE_ENV === 'production') {
+    setInterval(() => {
+      exec('node ./server/prerender.js', (error, stdout, stderr) => {
+        if (error) {
+          console.log(`error: ${error.message}`);
+          return;
+        }
+        if (stderr) {
+          console.log(`stderr: ${stderr}`);
+          return;
+        }
+        console.log(`stdout: ${stdout}`);
+      });
+    }, 60000);
+  }
 
   return app;
 }
