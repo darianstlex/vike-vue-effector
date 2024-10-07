@@ -1,8 +1,8 @@
 <template>
   <h1>Hello</h1>
   <p>
-    Hi <b>{{ data.name }}</b
-    >.
+    Hi
+    <b> {{ data.name }} </b>.
   </p>
   <ul>
     <li>

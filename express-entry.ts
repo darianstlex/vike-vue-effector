@@ -50,7 +50,7 @@ async function startServer() {
 
   if (process.env.NODE_ENV === 'production') {
     setInterval(() => {
-      exec('node ./server/prerender.js', (error, stdout, stderr) => {
+      exec('tsx ./server/prerender.ts', (error, stdout, stderr) => {
         if (error) {
           console.log(`error: ${error.message}`);
           return;
