@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx ./express-entry.ts",
     "build": "vite build",
-    "preview": "cross-env NODE_ENV=production tsx ./express-entry.ts",
+    "start": "npm run build && cross-env NODE_ENV=production tsx ./express-entry.ts",
     "lint": "eslint ."
   },
   "keywords": [],
@@ -37,7 +37,7 @@
     "prettier": "^3.3.3",
     "tsx": "^4.19.1",
     "typescript": "^5.6.2",
-    "typescript-eslint": "^8.8.0",
+    "typescript-eslint": "^8.8.1",
     "unplugin-vue-markdown": "^0.26.2",
     "vike": "^0.4.198",
     "vike-vue": "^0.8.5",
