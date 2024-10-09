@@ -8,6 +8,7 @@ import Layout from '@layouts/LayoutDefault.vue';
 export default {
   Layout,
   Head,
+  cacheControl: 'public, max-age=604800',
   // https://vike.dev/meta
   meta: {
     // Event - fires on server side when the page gets initiated

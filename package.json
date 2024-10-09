@@ -12,14 +12,14 @@
   "keywords": [],
   "author": "",
   "dependencies": {
-    "@universal-middleware/core": "^0.2.12",
-    "@universal-middleware/express": "^0.2.7",
+    "@universal-middleware/core": "^0.2.13",
+    "@universal-middleware/express": "^0.2.8",
     "@vue/compiler-sfc": "^3.5.11",
     "@vue/server-renderer": "^3.5.11",
     "cross-fetch": "^4.0.0",
     "effector": "^23.2.3",
     "express": "^4.21.1",
-    "patronum": "^2.2.0",
+    "patronum": "^2.3.0",
     "telefunc": "^0.1.79",
     "vue": "^3.5.11"
   },
