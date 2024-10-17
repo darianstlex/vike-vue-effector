@@ -13,7 +13,7 @@
   "author": "",
   "dependencies": {
     "@universal-middleware/core": "^0.2.13",
-    "@universal-middleware/express": "^0.2.8",
+    "@universal-middleware/express": "^0.2.9",
     "@vue/compiler-sfc": "^3.5.12",
     "@vue/server-renderer": "^3.5.12",
     "cross-fetch": "^4.0.0",
