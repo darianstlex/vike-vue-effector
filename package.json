@@ -41,7 +41,7 @@
     "unplugin-vue-markdown": "^0.26.2",
     "vike": "^0.4.199",
     "vike-vue": "^0.8.5",
-    "vite": "^5.4.9",
+    "vite": "^5.4.10",
     "vue-eslint-parser": "^9.4.3"
   }
 }
