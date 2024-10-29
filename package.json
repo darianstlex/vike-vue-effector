@@ -20,7 +20,7 @@
     "effector": "^23.2.3",
     "express": "^4.21.1",
     "patronum": "^2.3.0",
-    "telefunc": "^0.1.79",
+    "telefunc": "^0.1.80",
     "vue": "^3.5.12"
   },
   "devDependencies": {
@@ -33,11 +33,11 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "eslint-plugin-vue": "^9.29.1",
+    "eslint-plugin-vue": "^9.30.0",
     "prettier": "^3.3.3",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3",
-    "typescript-eslint": "^8.11.0",
+    "typescript-eslint": "^8.12.2",
     "unplugin-vue-markdown": "^0.26.2",
     "vike": "^0.4.199",
     "vike-vue": "^0.8.5",
