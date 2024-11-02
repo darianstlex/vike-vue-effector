@@ -20,7 +20,7 @@
     "effector": "^23.2.3",
     "express": "^4.21.1",
     "patronum": "^2.3.0",
-    "telefunc": "^0.1.80",
+    "telefunc": "^0.1.81",
     "vue": "^3.5.12"
   },
   "devDependencies": {
