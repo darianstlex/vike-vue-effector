@@ -14,34 +14,34 @@
   "dependencies": {
     "@universal-middleware/core": "^0.2.13",
     "@universal-middleware/express": "^0.2.9",
-    "@vue/compiler-sfc": "^3.5.12",
-    "@vue/server-renderer": "^3.5.12",
+    "@vue/compiler-sfc": "^3.5.13",
+    "@vue/server-renderer": "^3.5.13",
     "cross-fetch": "^4.0.0",
     "effector": "^23.2.3",
     "express": "^4.21.1",
     "patronum": "^2.3.0",
     "telefunc": "^0.1.81",
-    "vue": "^3.5.12"
+    "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@eslint/js": "^9.14.0",
+    "@eslint/js": "^9.15.0",
     "@types/express": "^5.0.0",
-    "@vitejs/plugin-vue": "^5.1.4",
+    "@vitejs/plugin-vue": "^5.2.0",
     "@vue/language-server": "^2.1.10",
     "cross-env": "^7.0.3",
-    "eslint": "^9.14.0",
+    "eslint": "^9.15.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "eslint-plugin-vue": "^9.30.0",
+    "eslint-plugin-vue": "^9.31.0",
     "prettier": "^3.3.3",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3",
-    "typescript-eslint": "^8.13.0",
+    "typescript-eslint": "^8.14.0",
     "unplugin-vue-markdown": "^0.26.2",
     "vike": "^0.4.201",
     "vike-vue": "^0.8.5",
-    "vite": "^5.4.10",
+    "vite": "^5.4.11",
     "vue-eslint-parser": "^9.4.3"
   }
 }
