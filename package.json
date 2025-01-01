@@ -37,7 +37,7 @@
     "prettier": "^3.4.2",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
-    "typescript-eslint": "^8.18.2",
+    "typescript-eslint": "^8.19.0",
     "unplugin-vue-markdown": "^0.28.0",
     "vike": "^0.4.211",
     "vike-vue": "^0.8.6",
