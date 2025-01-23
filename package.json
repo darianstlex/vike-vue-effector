@@ -13,7 +13,7 @@
   "author": "",
   "dependencies": {
     "@universal-middleware/core": "^0.3.0",
-    "@universal-middleware/express": "^0.3.3",
+    "@universal-middleware/express": "^0.4.0",
     "@vue/compiler-sfc": "^3.5.13",
     "@vue/server-renderer": "^3.5.13",
     "cross-fetch": "^4.1.0",
@@ -37,11 +37,11 @@
     "prettier": "^3.4.2",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3",
-    "typescript-eslint": "^8.20.0",
+    "typescript-eslint": "^8.21.0",
     "unplugin-vue-markdown": "^28.1.0",
     "vike": "^0.4.218",
     "vike-vue": "^0.8.6",
-    "vite": "^6.0.7",
+    "vite": "^6.0.11",
     "vue-eslint-parser": "^9.4.3"
   }
 }
