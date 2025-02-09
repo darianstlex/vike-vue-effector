@@ -6,7 +6,7 @@ import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createDevMiddleware } from 'vike/server';
 
-import { connectTelefunc } from '@/server/telefunc';
+import { connectTelefunc } from '@/server/api/telefunc';
 import { connectVike } from '@/server/vike';
 
 const __filename = fileURLToPath(import.meta.url);
