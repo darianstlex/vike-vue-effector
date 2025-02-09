@@ -1,6 +1,6 @@
 import type { Effect, Event, EventCallable, Scope, Store, Unit } from 'effector';
 import { createWatch, is, scopeBind } from 'effector';
-import type { DeepReadonly, ShallowRef } from 'vue';
+import type { ShallowRef } from 'vue';
 import { onUnmounted, shallowRef, watch } from 'vue';
 
 import { useScope } from './useScope';
@@ -68,7 +68,7 @@ const createStoreWatcher = (scopeRef: ShallowRef<Scope>, unit: Store<any>, valRe
   });
 };
 
-export function useUnit<State>(store: Store<State>, opts?: { forceScope?: boolean }): DeepReadonly<ShallowRef<State>>;
+export function useUnit<State>(store: Store<State>, opts?: { forceScope?: boolean }): ShallowRef<State>;
 export function useUnit(event: Event<void>, opts?: { forceScope?: boolean }): () => void;
 export function useUnit<T>(event: Event<T>, opts?: { forceScope?: boolean }): (payload: T) => T;
 export function useUnit<R>(fx: Effect<void, R, any>, opts?: { forceScope?: boolean }): () => Promise<R>;
@@ -86,7 +86,7 @@ export function useUnit<List extends (Event<any> | Effect<any, any> | Store<any>
         ? () => Promise<D>
         : (payload: P) => Promise<D>
       : List[Key] extends Store<infer V>
-        ? DeepReadonly<ShallowRef<V>>
+        ? ShallowRef<V>
         : never;
 };
 export function useUnit<Shape extends Record<string, Event<any> | Effect<any, any, any> | Store<any>>>(
@@ -102,7 +102,7 @@ export function useUnit<Shape extends Record<string, Event<any> | Effect<any, an
         ? () => Promise<D>
         : (payload: P) => Promise<D>
       : Shape[Key] extends Store<infer V>
-        ? DeepReadonly<ShallowRef<V>>
+        ? ShallowRef<V>
         : never;
 };
 
