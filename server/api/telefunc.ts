@@ -4,7 +4,7 @@ import { config, telefunc } from 'telefunc';
 config.telefuncUrl = '/api/_data';
 
 export const connectTelefunc = (app: express.Application) => {
-  app.all('/api/_data', async (req, res) => {
+  app.post('/api/_data', async (req, res) => {
     const context = {};
     const httpResponse = await telefunc({
       url: req.originalUrl,
