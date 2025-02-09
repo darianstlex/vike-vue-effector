@@ -12,7 +12,7 @@ const pageContext = usePageContext();
 const { href } = useAttrs();
 const isActive = computed(() => {
   const { urlPathname } = pageContext;
-  return href === '/' ? urlPathname === href : urlPathname.startsWith(href);
+  return href === '/' ? urlPathname === href : urlPathname.startsWith(href as string);
 });
 </script>
 

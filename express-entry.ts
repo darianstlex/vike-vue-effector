@@ -1,13 +1,13 @@
+import compression from 'compression';
+import cookieParser from 'cookie-parser';
 import express from 'express';
 import { exec } from 'node:child_process';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createDevMiddleware } from 'vike/server';
 
-import { createHandler } from '@universal-middleware/express';
-
-import { telefuncHandler } from './server/telefunc-handler';
-import { vikeHandler } from './server/vike-handler';
+import { connectTelefunc } from '@/server/telefunc';
+import { connectVike } from '@/server/vike';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -19,6 +19,10 @@ export default (await startServer()) as unknown;
 async function startServer() {
   const app = express();
 
+  app.use(cookieParser());
+  app.use(compression());
+  app.use(express.text());
+
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(`${root}/dist/client`));
   } else {
@@ -26,19 +30,13 @@ async function startServer() {
     app.use(devMiddleware);
   }
 
-  app.post('/_telefunc', createHandler(telefuncHandler)());
+  // attach telefunc middleware
+  connectTelefunc(app);
 
-  /**
-   * Vike route
-   *
-   * @link {@see https://vike.dev}
-   **/
-  app.all(/(.*)/, createHandler(vikeHandler)());
+  // attach vike middleware
+  connectVike(app);
 
-  app.listen(port, () => {
-    console.log(`Server listening on http://localhost:${port}`);
-  });
-
+  // run periodic prerender
   if (process.env.NODE_ENV === 'production') {
     setInterval(() => {
       exec('tsx ./server/prerender.ts', (error, stdout, stderr) => {
@@ -54,6 +52,10 @@ async function startServer() {
       });
     }, 60000);
   }
+
+  app.listen(port, () => {
+    console.log(`Server listening on http://localhost:${port}`);
+  });
 
   return app;
 }
