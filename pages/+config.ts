@@ -21,7 +21,6 @@ export default {
     },
   },
   passToClient: ['scopeValues'],
-  prerender: false,
 
   // <title>
   title: 'My Vike App',

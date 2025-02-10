@@ -14,7 +14,7 @@
   "dependencies": {
     "@vue/compiler-sfc": "^3.5.13",
     "@vue/server-renderer": "^3.5.13",
-    "compression": "^1.7.5",
+    "compression": "^1.8.0",
     "cookie-parser": "^1.4.7",
     "cross-fetch": "^4.1.0",
     "dotenv": "^16.4.7",
@@ -40,9 +40,9 @@
     "prettier": "^3.5.0",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3",
-    "typescript-eslint": "^8.23.0",
+    "typescript-eslint": "^8.24.0",
     "unplugin-vue-markdown": "^28.3.0",
-    "vike": "^0.4.220",
+    "vike": "^0.4.221",
     "vike-vue": "^0.8.6",
     "vite": "^6.1.0",
     "vue-eslint-parser": "^9.4.3"
