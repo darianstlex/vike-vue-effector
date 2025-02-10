@@ -26,8 +26,3 @@ The [`onPageTransitionStart()` hook](https://vike.dev/onPageTransitionStart), to
 ### SSR
 
 SSR is enabled by default. You can [disable it](https://vike.dev/ssr) for all your pages or only for some pages.
-
-### HTML Streaming
-
-You can enable/disable [HTML streaming](https://vike.dev/streaming) for all your pages, or only for some pages while still using it for others.
-
