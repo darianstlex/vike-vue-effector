@@ -32,7 +32,7 @@
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/language-server": "^2.2.0",
     "cross-env": "^7.0.3",
-    "eslint": "^9.20.0",
+    "eslint": "^9.20.1",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-simple-import-sort": "^12.1.1",
@@ -42,7 +42,7 @@
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.24.0",
     "unplugin-vue-markdown": "^28.3.0",
-    "vike": "^0.4.221",
+    "vike": "^0.4.222",
     "vike-vue": "^0.8.6",
     "vite": "^6.1.0",
     "vue-eslint-parser": "^9.4.3"
