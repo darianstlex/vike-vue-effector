@@ -30,7 +30,7 @@
     "@types/cookie-parser": "^1.4.8",
     "@types/express": "^5.0.0",
     "@vitejs/plugin-vue": "^5.2.1",
-    "@vue/language-server": "^2.2.0",
+    "@vue/language-server": "^2.2.2",
     "cross-env": "^7.0.3",
     "eslint": "^9.20.1",
     "eslint-config-prettier": "^10.0.1",
