@@ -40,9 +40,9 @@
     "prettier": "^3.5.3",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2",
-    "typescript-eslint": "^8.26.0",
+    "typescript-eslint": "^8.26.1",
     "unplugin-vue-markdown": "^28.3.1",
-    "vike": "^0.4.224",
+    "vike": "^0.4.225",
     "vike-vue": "^0.8.6",
     "vite": "^6.2.1",
     "vue-eslint-parser": "^10.1.1"
