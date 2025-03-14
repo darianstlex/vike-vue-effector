@@ -21,7 +21,7 @@
     "effector": "^23.3.0",
     "express": "^5.0.1",
     "patronum": "^2.3.0",
-    "telefunc": "^0.1.87",
+    "telefunc": "^0.2.1",
     "vue": "^3.5.13"
   },
   "devDependencies": {
@@ -44,7 +44,7 @@
     "unplugin-vue-markdown": "^28.3.1",
     "vike": "^0.4.225",
     "vike-vue": "^0.8.6",
-    "vite": "^6.2.1",
+    "vite": "^6.2.2",
     "vue-eslint-parser": "^10.1.1"
   },
   "overrides": {
