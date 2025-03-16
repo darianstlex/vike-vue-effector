@@ -43,7 +43,7 @@
     "typescript-eslint": "^8.26.1",
     "unplugin-vue-markdown": "^28.3.1",
     "vike": "^0.4.225",
-    "vike-vue": "^0.8.6",
+    "vike-vue": "^0.8.7",
     "vite": "^6.2.2",
     "vue-eslint-parser": "^10.1.1"
   },
