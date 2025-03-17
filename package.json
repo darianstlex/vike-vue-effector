@@ -29,7 +29,7 @@
     "@types/compression": "^1.7.5",
     "@types/cookie-parser": "^1.4.8",
     "@types/express": "^5.0.0",
-    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitejs/plugin-vue": "^5.2.3",
     "@vue/language-server": "^2.2.8",
     "cross-env": "^7.0.3",
     "eslint": "^9.22.0",
