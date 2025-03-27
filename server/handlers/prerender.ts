@@ -1,4 +1,4 @@
-import { prerender } from 'vike/prerender';
+import { prerender } from 'vike/api';
 
 (async () => {
   try {

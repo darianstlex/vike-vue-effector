@@ -4,9 +4,9 @@
   "description": "Vike+Vue+Effector",
   "type": "module",
   "scripts": {
-    "dev": "tsx ./express-entry.ts",
+    "dev": "tsx server/entry.ts",
     "build": "vike build",
-    "start": "npm run build && cross-env NODE_ENV=production tsx ./express-entry.ts",
+    "start": "npm run build && cross-env NODE_ENV=production tsx server/entry.ts",
     "lint": "eslint ."
   },
   "keywords": [],
@@ -22,7 +22,8 @@
     "express": "^5.0.1",
     "patronum": "^2.3.0",
     "telefunc": "^0.2.2",
-    "vue": "^3.5.13"
+    "vue": "^3.5.13",
+    "tsx": "^4.19.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.23.0",
@@ -38,7 +39,6 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-vue": "^10.0.0",
     "prettier": "^3.5.3",
-    "tsx": "^4.19.3",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.28.0",
     "unplugin-vue-markdown": "^28.3.1",
@@ -48,6 +48,7 @@
     "vue-eslint-parser": "^10.1.1"
   },
   "overrides": {
+    "ajv": "^8.17.1",
     "esbuild": "^0.25.0"
   }
 }
