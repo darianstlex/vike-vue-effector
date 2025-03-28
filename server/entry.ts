@@ -26,7 +26,11 @@ async function startServer() {
   app.use(express.text());
 
   if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(`${root}/dist/client`));
+    app.use(
+      express.static(`${root}/dist/client`, {
+        redirect: false,
+      }),
+    );
   } else {
     const { devMiddleware } = await createDevMiddleware({ root });
     app.use(devMiddleware);
