@@ -5,6 +5,7 @@ import prettier from 'eslint-plugin-prettier/recommended';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import pluginVue from 'eslint-plugin-vue';
 import tseslint from 'typescript-eslint';
+import globals from 'globals';
 import vueParser from 'vue-eslint-parser';
 
 export default tseslint.config(
@@ -24,6 +25,10 @@ export default tseslint.config(
   ...tseslint.configs.recommended,
   {
     languageOptions: {
+      globals: {
+        ...globals.serviceworker,
+        ...globals.browser,
+      },
       parserOptions: {
         sourceType: 'module',
         ecmaVersion: 'latest',
