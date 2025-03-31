@@ -4,7 +4,7 @@
   "description": "Vike+Vue+Effector",
   "type": "module",
   "scripts": {
-    "dev": "tsx server/entry.ts",
+    "dev": "tsx server/entry.ts --force",
     "build": "vike build",
     "start": "npm run build && cross-env NODE_ENV=production tsx server/entry.ts",
     "lint": "eslint ."
