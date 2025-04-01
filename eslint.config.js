@@ -25,10 +25,6 @@ export default tseslint.config(
   ...tseslint.configs.recommended,
   {
     languageOptions: {
-      globals: {
-        ...globals.serviceworker,
-        ...globals.browser,
-      },
       parserOptions: {
         sourceType: 'module',
         ecmaVersion: 'latest',
@@ -98,8 +94,8 @@ export default tseslint.config(
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/consistent-type-imports': 'error',
       // other
-      'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-      'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+      'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
+      'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
       '@typescript-eslint/no-unused-vars': [
         1,
         {
@@ -114,8 +110,13 @@ export default tseslint.config(
         },
       ],
     },
+    languageOptions: {
+      sourceType: 'module',
+      globals: {
+        ...globals.browser,
+      },
+    },
   },
-
   {
     files: ['**/*.vue'],
     languageOptions: {
