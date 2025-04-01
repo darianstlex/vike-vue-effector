@@ -113,7 +113,7 @@ export default tsEslint.config(
     languageOptions: {
       sourceType: 'module',
       globals: {
-        ...globals.browser,
+        ...globals['shared-node-browser'],
       },
     },
   },
