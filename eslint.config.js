@@ -4,11 +4,11 @@ import eslint from '@eslint/js';
 import prettier from 'eslint-plugin-prettier/recommended';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import pluginVue from 'eslint-plugin-vue';
-import tseslint from 'typescript-eslint';
+import tsEslint from 'typescript-eslint';
 import globals from 'globals';
 import vueParser from 'vue-eslint-parser';
 
-export default tseslint.config(
+export default tsEslint.config(
   {
     ignores: [
       'dist/*',
@@ -22,7 +22,7 @@ export default tseslint.config(
     ],
   },
   eslint.configs.recommended,
-  ...tseslint.configs.recommended,
+  ...tsEslint.configs.recommended,
   {
     languageOptions: {
       parserOptions: {
@@ -122,7 +122,7 @@ export default tseslint.config(
     languageOptions: {
       parser: vueParser,
       parserOptions: {
-        parser: tseslint.parser,
+        parser: tsEslint.parser,
         sourceType: 'module',
         ecmaVersion: 'latest',
       },
