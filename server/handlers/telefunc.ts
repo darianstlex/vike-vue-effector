@@ -1,5 +1,5 @@
 import type express from 'express';
-import { config, telefunc } from 'telefunc';
+import { config, onBug, telefunc } from 'telefunc';
 
 config.telefuncUrl = '/api/_data';
 
@@ -16,3 +16,7 @@ export const connectTelefunc = (app: express.Application) => {
     res.status(statusCode).type(contentType).send(body);
   });
 };
+
+onBug(() => {
+  // log telefunc error
+});
