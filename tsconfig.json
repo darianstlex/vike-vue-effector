@@ -20,7 +20,7 @@
       "@styles/*": ["./styles/*"],
       "@utils/*": ["./utils/*"]
     },
-    "target": "ES2022",
+    "target": "ESNext",
     "lib": [
       "DOM",
       "DOM.Iterable",
