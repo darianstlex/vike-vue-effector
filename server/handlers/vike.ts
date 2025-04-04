@@ -1,7 +1,7 @@
 import type express from 'express';
 import { renderPage } from 'vike/server';
 
-export const connectVike = (app: express.Application) => {
+export const handleVike = (app: express.Application) => {
   app.get(/.*/, async (req, res, next) => {
     const pageContextInit = {
       cookies: req.cookies,

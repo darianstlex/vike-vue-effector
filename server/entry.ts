@@ -8,8 +8,8 @@ import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createDevMiddleware } from 'vike/server';
 
-import { connectTelefunc } from './handlers/telefunc';
-import { connectVike } from './handlers/vike';
+import { handleTelefunc } from './handlers/telefunc';
+import { handleVike } from './handlers/vike';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -35,10 +35,10 @@ async function startServer() {
   }
 
   // attach telefunc middleware
-  connectTelefunc(app);
+  handleTelefunc(app);
 
   // attach vike middleware
-  connectVike(app);
+  handleVike(app);
 
   // run periodic prerender
   if (process.env.NODE_ENV === 'production') {

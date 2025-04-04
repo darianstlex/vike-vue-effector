@@ -3,7 +3,7 @@ import { config, onBug, telefunc } from 'telefunc';
 
 config.telefuncUrl = '/api/_data';
 
-export const connectTelefunc = (app: express.Application) => {
+export const handleTelefunc = (app: express.Application) => {
   app.post('/api/_data', async (req, res) => {
     const context = {};
     const httpResponse = await telefunc({
