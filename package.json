@@ -16,7 +16,7 @@
     "compression": "^1.8.0",
     "cookie-parser": "^1.4.7",
     "cross-fetch": "^4.1.0",
-    "dotenv": "^16.5.0",
+    "dotenv": "^17.0.0",
     "effector": "^23.3.0",
     "express": "^5.1.0",
     "patronum": "^2.3.0",
@@ -27,19 +27,19 @@
     "vue": "^3.5.17"
   },
   "devDependencies": {
-    "@eslint/js": "^9.29.0",
+    "@eslint/js": "^9.30.0",
     "@types/compression": "^1.8.1",
     "@types/cookie-parser": "^1.4.9",
     "@types/express": "^5.0.3",
     "@vitejs/plugin-vue": "^6.0.0",
     "cross-env": "^7.0.3",
-    "eslint": "^9.29.0",
+    "eslint": "^9.30.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.5.1",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-vue": "^10.2.0",
     "globals": "^16.2.0",
-    "prettier": "^3.6.1",
+    "prettier": "^3.6.2",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.35.0",
     "unplugin-vue-markdown": "^28.3.1",
@@ -47,6 +47,8 @@
     "vue-eslint-parser": "^10.1.4"
   },
   "overrides": {
-    "esbuild": "^0.25.5"
+    "dotenv": "^17.0.0",
+    "esbuild": "^0.25.5",
+    "vite": "^7.0.0"
   }
 }
