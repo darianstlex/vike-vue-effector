@@ -1,5 +1,4 @@
 // https://vike.dev/route
-export { route };
 
 import { render } from 'vike/abort';
 import { resolveRoute } from 'vike/routing';
@@ -8,7 +7,7 @@ import type { RouteSync } from 'vike/types';
 import { names } from './names';
 
 // We use a Route Function to implement advanced routing logic
-const route: RouteSync = (pageContext): ReturnType<RouteSync> => {
+export const route: RouteSync = (pageContext): ReturnType<RouteSync> => {
   if (pageContext.urlPathname === '/hello' || pageContext.urlPathname === '/hello/') {
     const name = 'anonymous';
     return { routeParams: { name } };

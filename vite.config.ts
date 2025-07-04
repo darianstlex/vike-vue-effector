@@ -1,5 +1,6 @@
 import { fileURLToPath, URL } from 'node:url';
 import { telefunc } from 'telefunc/vite';
+import swc from 'unplugin-swc';
 import md from 'unplugin-vue-markdown/vite';
 import vike from 'vike/plugin';
 import { defineConfig } from 'vite';
@@ -14,6 +15,13 @@ export default defineConfig({
       include: [/\.vue$/, /\.md$/],
     }),
     md({}),
+    swc.vite({
+      jsc: {
+        experimental: {
+          plugins: [['effector-swc-plugin', {}]],
+        },
+      },
+    }),
   ],
   resolve: {
     alias: {

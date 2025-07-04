@@ -16,6 +16,7 @@ node_modules/
 dist/
 npm-debug.log
 yarn-error.log
+.swc
 
 # IDEs
 .idea
