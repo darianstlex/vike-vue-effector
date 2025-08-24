@@ -5,7 +5,7 @@ import { inject, provide } from 'vue';
 
 import { getMergeScope, isClient } from './scope';
 
-const key: InjectionKey<ShallowRef<Scope>> = Symbol();
+const key: InjectionKey<ShallowRef<Scope>> = Symbol('@app-scope');
 
 export const useScope = (): ShallowRef<Scope> => {
   const scopeRef = inject(key);
