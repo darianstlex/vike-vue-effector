@@ -1,7 +1,7 @@
 import { allSettled, fork, serialize } from 'effector';
-import type { OnBeforeRenderAsync } from 'vike/types';
+import type { PageContextServer } from 'vike/types';
 
-export const onBeforeRender: OnBeforeRenderAsync = async (pageContext): ReturnType<OnBeforeRenderAsync> => {
+export const onBeforeRender = async (pageContext: PageContextServer) => {
   const { pageInitiated } = pageContext.config;
 
   const scope = fork();

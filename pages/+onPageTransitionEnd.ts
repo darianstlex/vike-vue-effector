@@ -1,5 +1,7 @@
-import type { OnPageTransitionEndAsync } from 'vike/types';
+import type { PageContextClient } from 'vike/types';
 
-export const onPageTransitionEnd: OnPageTransitionEndAsync = async () => {
-  document.querySelector('body')?.classList.remove('page-is-transitioning');
+export const onPageTransitionEnd = async (pageContext: Partial<PageContextClient>) => {
+  if (pageContext.isHydration) {
+    document.querySelector('body')?.classList.remove('page-is-transitioning');
+  }
 };
