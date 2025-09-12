@@ -21,6 +21,11 @@ const mergeScope = (values?: SerializedState) => {
 
   // @ts-expect-error this is a really hacky way to "hydrate" scope
   Object.assign(scopeRef.value.values.sidMap, values);
+  /**
+   * We should explicitly set this flag to true, because otherwise the scope will be treated as it was not created from serialized values
+   * => effector will not apply custom serializers to the scope
+   */
+  (scopeRef.value as any).fromSerialize = true;
 
   const linksToRun: string[] = [];
 
