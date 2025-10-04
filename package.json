@@ -51,6 +51,6 @@
     "vue-eslint-parser": "^10.2.0"
   },
   "overrides": {
-    "typescript": "^5.9.3"
+    "typescript": "$typescript"
   }
 }
